@@ -1,4 +1,4 @@
-import uvicorn   #####comment when deployed
+import uvicorn   
 from fastapi import Depends, FastAPI, HTTPException, status,Body
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import secrets
@@ -10,14 +10,6 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from datetime import datetime
 
-# import os
-# from fastapi import FastAPI, Body, HTTPException, status
-# from fastapi.responses import JSONResponse
-# from fastapi.encoders import jsonable_encoder
-# from pydantic import BaseModel, Field, EmailStrcd
-# from bson import ObjectId
-# from typing import Optional, List
-# import motor.motor_asyncio
 
 app = FastAPI()
 security = HTTPBasic()
@@ -114,6 +106,6 @@ async def PostData(data: SensorModel = Body(...),username= Depends(get_current_u
     new_data = await dbname["iotwaterapi"].insert_one(data)
     created_data = await dbname["iotwaterapi"].find_one({"_id": new_data.inserted_id})
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_data)
-
- if __name__ == "__main__":
-     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+if __name__ == "__main__":
+    # uvicorn.run(debug=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
