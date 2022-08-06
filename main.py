@@ -1,4 +1,4 @@
-# import uvicorn   #####comment when deployed
+import uvicorn   #####comment when deployed
 from fastapi import Depends, FastAPI, HTTPException, status,Body
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import secrets
@@ -115,5 +115,5 @@ async def PostData(data: SensorModel = Body(...),username= Depends(get_current_u
     created_data = await dbname["iotwaterapi"].find_one({"_id": new_data.inserted_id})
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_data)
 
-# if __name__ == "__main__":
-#     uvicorn.run("wateranalytics:app", host="127.0.0.1", port=8000, reload=True)
+ if __name__ == "__main__":
+     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
