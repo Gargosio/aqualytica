@@ -1,4 +1,4 @@
-import uvicorn   #####comment when deployed
+# import uvicorn   #####comment when deployed
 from fastapi import Depends, FastAPI, HTTPException, status,Body
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import secrets
@@ -8,7 +8,7 @@ from bson import ObjectId
 from typing import Optional, List
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from datetime import date, datetime, time, timedelta
+from datetime import datetime
 
 # import os
 # from fastapi import FastAPI, Body, HTTPException, status
@@ -23,8 +23,8 @@ app = FastAPI()
 security = HTTPBasic()
 
 def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
-    correct_username = secrets.compare_digest(credentials.username, "IOTuser")
-    correct_password = secrets.compare_digest(credentials.password, "iot_user@20220406")
+    correct_username = secrets.compare_digest(credentials.username, "aquasense")
+    correct_password = secrets.compare_digest(credentials.password, "aqualytica_0822")
     if not (correct_username and correct_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -60,8 +60,8 @@ class SensorModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     device: str = Field(...)
     timestamp: datetime = Field(...)
-    Messagetype: float = Field(...)
-    Level: float = Field(...)
+    MessageType: int = Field(...)
+    Level: int = Field(...)
     Battery: int = Field(...)
 
     class Config:
@@ -71,10 +71,10 @@ class SensorModel(BaseModel):
         schema_extra = {
             "example": {
                 "device": "devicea",
-                "timestamp": "2032-04-23T10:20:30.400+02:30",
-                "Messagetype": "56.3",
-                "Level": "32.0",
-                "Battery": "34.9",
+                "timestamp": 1659639966,
+                "MessageType": 56.3,
+                "Level": 32.0,
+                "Battery": 34.9,
             }
         }
 
@@ -82,8 +82,8 @@ class SensorModel(BaseModel):
 class UpdateSensorModel(BaseModel):
     device: Optional[str]
     timestamp: Optional[datetime]
-    Messagetype: Optional[float]
-    Level: Optional[float]
+    MessageType: Optional[int]
+    Level: Optional[int]
     Battery: Optional[int]
 
     class Config:
@@ -92,10 +92,10 @@ class UpdateSensorModel(BaseModel):
         schema_extra = {
             "example": {
                 "device": "devicea",
-                "timestamp": "2032-04-23T10:20:30.400+02:30",
-                "Messagetype": "56.3",
-                "Level": "32.0",
-                "Battery": "34.9",
+                "timestamp": 1659639966,
+                "MessageType": 56.3,
+                "Level": 32.0,
+                "Battery": 34.9,
             }
         }
 
@@ -116,4 +116,4 @@ async def PostData(data: SensorModel = Body(...),username= Depends(get_current_u
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_data)
 
 # if __name__ == "__main__":
-#     uvicorn.run("mongoapi:app", host="127.0.0.1", port=8000, reload=True)
+#     uvicorn.run("wateranalytics:app", host="127.0.0.1", port=8000, reload=True)
