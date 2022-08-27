@@ -51,8 +51,8 @@ class PyObjectId(ObjectId):
 class SensorModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     device: str = Field(...)
-    timestamp: datetime = Field(...)
-    MessageType: int = Field(...)
+    time: datetime = Field(...)
+    Messagetype: int = Field(...)
     Level: int = Field(...)
     Battery: int = Field(...)
 
@@ -63,8 +63,8 @@ class SensorModel(BaseModel):
         schema_extra = {
             "example": {
                 "device": "devicea",
-                "timestamp": 1659639966,
-                "MessageType": 56.3,
+                "time": 1659639966,
+                "Messagetype": 56.3,
                 "Level": 32.0,
                 "Battery": 34.9,
             }
@@ -73,8 +73,8 @@ class SensorModel(BaseModel):
 
 class UpdateSensorModel(BaseModel):
     device: Optional[str]
-    timestamp: Optional[datetime]
-    MessageType: Optional[int]
+    time: Optional[datetime]
+    Messagetype: Optional[int]
     Level: Optional[int]
     Battery: Optional[int]
 
@@ -84,8 +84,8 @@ class UpdateSensorModel(BaseModel):
         schema_extra = {
             "example": {
                 "device": "devicea",
-                "timestamp": 1659639966,
-                "MessageType": 56.3,
+                "time": 1659639966,
+                "Messagetype": 56.3,
                 "Level": 32.0,
                 "Battery": 34.9,
             }
