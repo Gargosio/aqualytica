@@ -25,7 +25,7 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
         )
     return credentials.username
 
-CONNECTION_STRING = "mongodb+srv://toloo:Godocholoo@cluster0.idj1r.mongodb.net/test"
+CONNECTION_STRING = ****************************** #insert mongo db credentials
 client = motor.motor_asyncio.AsyncIOMotorClient(CONNECTION_STRING)
 dbname = client.iotdatadb
 # collection_name = dbname.get_collection("iotdatacoll")
